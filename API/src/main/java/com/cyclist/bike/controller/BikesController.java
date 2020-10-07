@@ -9,24 +9,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/Bikes")
+@RequestMapping("/api/v1/bikes")
 public class BikesController{
     @Autowired
     private BikeRepository bikeRepository;
 
     @GetMapping
     public List<Bike> list() {
-        return new ArrayList<Bike>();
+        return bikeRepository.findAll();
     }
 
     @PostMapping
     public void create(@RequestBody Bike newBike) {
-
+        bikeRepository.save(newBike);
     }
 
-    @GetMapping
-    @RequestMapping("/{id}")
+    @GetMapping("/{id}")
     public Bike get(@PathVariable("id") long id) {
-        return new Bike();
+        return bikeRepository.getOne(id);
+
     }
 }
